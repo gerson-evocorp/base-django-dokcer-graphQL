@@ -1,0 +1,21 @@
+"nome do projeto"_manage
+    settings.py
+    schema.py
+    urls.py
+    wsgi.py
+apps
+    "name"
+        rest_api # case app user for authentication
+        models
+        views
+        tests
+        schema
+        admin.py
+        wsgi.py
+.env
+.env.example
+.gitignore
+requiriments.txt
+DokerFile
+docker-compose.yml
+manage.py

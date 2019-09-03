@@ -1,0 +1,8 @@
+Django>=2.0,<3.0
+psycopg2>=2.7,<3.0
+Pillow==6.1.0
+djangorestframework==3.10.0
+Markdown==3.1.1
+django-filter==2.2.0
+graphene==2.1.8
+graphene-django==2.5.0

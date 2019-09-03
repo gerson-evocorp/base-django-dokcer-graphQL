@@ -1,0 +1,24 @@
+# MODEL
+class Book:
+    author = models.ForeignKey(User)
+    title = models.CharField(max_length=125)
+
+    class Meta:
+        app_label = "library"
+
+#SERVICE
+from library.models import Book
+
+def get_books(limit=None, **filters):
+    """ simple service function for retrieving books can be widely extended """
+    if limit:
+        return Book.objects.filter(**filters)[:limit]
+    return Book.objects.filter(**filters)
+
+# VIEWS 
+from library.services import get_books
+
+class BookListView(ListView):
+    """ simple view, e.g. implement a _build and _apply filters function """
+    queryset = get_books()
+
