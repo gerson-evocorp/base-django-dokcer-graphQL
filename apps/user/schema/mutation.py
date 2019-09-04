@@ -2,7 +2,8 @@ import graphene
 from django.contrib.auth import get_user_model
 from graphene_django.types import DjangoObjectType
 from .types import UserType
-
+from django_graphene_permissions import permissions_checker
+from django_graphene_permissions.permissions import AllowAny
 
 class CreateUser(graphene.Mutation):
     user = graphene.Field(UserType)
@@ -12,6 +13,7 @@ class CreateUser(graphene.Mutation):
         password = graphene.String(required=True)
         email = graphene.String(required=True)
 
+    @permissions_checker([AllowAny])
     def mutate(self, info, username, password, email):
         user = get_user_model()(
             username=username,
