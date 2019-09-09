@@ -1,11 +1,17 @@
-Django>=2.0,<3.0
+Django==2.2.5
 psycopg2>=2.7,<3.0
-Pillow==6.1.0
-djangorestframework==3.10.0
 Markdown==3.1.1
+# IMAGENS
+Pillow==6.1.0
+# REST
+djangorestframework==3.10.0
+djangorestframework-jwt==1.11.0
 django-filter==2.2.0
+# GRAPHQL
 graphene==2.1.8
 graphene-django==2.5.0
 django-graphene-permissions==0.0.4 
 django-graphql-jwt==0.2.2
-djangorestframework-jwt==1.11.0
+# MONGO DB
+djongo==1.2.35
+sqlparse==0.2.4

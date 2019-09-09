@@ -2,7 +2,9 @@ version: '3'
 
 services:
   db:
-    image: postgres
+    image: mongo
+    ports:
+      - "27017:27017"
     env_file: 
       - .env
   web:

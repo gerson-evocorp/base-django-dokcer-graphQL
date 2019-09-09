@@ -3,28 +3,41 @@ from django.contrib.auth import get_user_model
 from graphene_django.types import DjangoObjectType
 from django_graphene_permissions import permissions_checker
 from django_graphene_permissions.permissions import IsAuthenticated, AllowAny
-import graphql_jwt
 from .types import UserType
-
+from graphql import GraphQLError
 
 class CreateUser(graphene.Mutation):
     user = graphene.Field(UserType)
 
     class Arguments:
-        username = graphene.String(required=True)
-        password = graphene.String(required=True)
-        email = graphene.String(required=True)
+        username = graphene.String()
+        password = graphene.String()
+        email = graphene.String()
+
+    ok = graphene.Boolean()
 
     @permissions_checker([AllowAny])
     def mutate(self, info, username, password, email):
-        user = get_user_model()(
-            username=username,
-            email=email,
-        )
-        user.set_password(password)
-        user.save()
+        ok = False
 
-        return CreateUser(user=user)
+        if username is None or not username.strip():            
+            raise GraphQLError('Nome é obrigatório')
+
+        if email is None or not email.strip():     
+            raise GraphQLError('Email é obrigatório')
+
+
+        # if get_user_model().objects.get(email=email):
+        #     raise GraphQLError('Este email já esta em uso por outro usuario')
+        # else:  
+        #     user = get_user_model()(
+        #         username=username,
+        #         email=email,
+        #     )
+        #     user.set_password(password)
+        #     user.save()
+        return CreateUser(ok=ok)
+    
 
 class DeleteUser(graphene.Mutation):
     ok = graphene.Boolean()
